@@ -9,8 +9,8 @@
         body { font-family: 'Segoe UI', Arial; background: var(--bg); color: var(--text); overflow: hidden; }
         .screen { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; }
         .hidden { display: none !important; }
-
-        /* YÜKLEME */
+        
+        /* YÜKLEME */ 
         .loading-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 20px; }
         .fire-logo { width: 120px; height: 120px; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -22,7 +22,7 @@
         .dots span:nth-child(2) { animation-delay: -0.16s; }
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
         .mac-info { position: absolute; bottom: 30px; font-size: 14px; background: var(--bg2); padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border); }
-
+        
         /* ANA SAYFA */
         .home-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: var(--bg2); border-bottom: 2px solid var(--border); }
         .logo { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 300; }
@@ -36,7 +36,7 @@
         .card:hover { border-color: var(--accent); background: var(--bg3); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3); }
         .card svg { width: 80px; height: 80px; color: var(--text); }
         .card span { font-size: 20px; font-weight: 500; }
-
+        
         /* 2 PANEL */
         .two-panel { display: grid; grid-template-columns: 250px 1fr; height: 100vh; }
         .left-panel { background: var(--bg2); border-right: 2px solid var(--border); display: flex; flex-direction: column; }
@@ -47,7 +47,7 @@
         .category-item:hover { border-color: var(--accent); }
         .category-item.active { background: var(--accent); color: #000; font-weight: 600; }
         .cat-count { float: right; opacity: 0.7; }
-
+        
         .right-panel { display: flex; flex-direction: column; }
         .right-header { padding: 20px 30px; background: var(--bg2); border-bottom: 2px solid var(--border); }
         .right-header h2 { color: var(--accent); }
@@ -58,7 +58,7 @@
         .channel-info { flex: 1; }
         .channel-name { font-size: 18px; font-weight: 600; margin-bottom: 5px; }
         .channel-group { font-size: 13px; color: var(--text2); }
-
+        
         /* OYNATICI */
         .player-screen { display: flex; flex-direction: column; }
         .player-video { width: 100%; height: calc(100vh - 150px); background: #000; }
@@ -68,11 +68,11 @@
         .player-category { font-size: 14px; color: var(--text2); }
         .control-buttons { display: flex; gap: 15px; justify-content: center; }
         .control-buttons button { background: var(--accent); border: none; color: #000; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; }
-
+        
         .bottom-bar { display: flex; justify-content: center; gap: 15px; padding: 20px 40px; background: var(--bg2); border-top: 1px solid var(--border); }
         .bottom-bar button { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 10px 20px; border-radius: 8px; cursor: pointer; }
         footer { position: absolute; bottom: 0; width: 100%; text-align: center; padding: 15px; font-size: 12px; color: var(--text2); background: var(--bg); }
-
+        
         /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
         .mbox { background: var(--bg2); border-radius: 15px; padding: 30px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
@@ -85,7 +85,7 @@
         .danger { background: #f44336 !important; color: #fff !important; }
         .playlist-item { padding: 10px; background: var(--bg3); margin: 5px 0; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
         .playlist-item button { margin-left: 5px; padding: 5px 15px; border: none; border-radius: 4px; cursor: pointer; }
-
+        
         /* QR */
         .qr-section { background: var(--bg3); border: 2px solid var(--accent); border-radius: 12px; padding: 20px; text-align: center; }
         .qr-code { background: white; padding: 15px; border-radius: 10px; display: inline-block; margin: 15px 0; }
@@ -190,7 +190,7 @@
         <div class="mbox">
             <button class="mclose" id="mclose">✕</button>
             <h2>⚙️ Ayarlar</h2>
-
+            
             <div class="msection">
                 <div class="qr-section">
                     <h3>📱 QR ile Ekle</h3>
@@ -202,7 +202,7 @@
                     <div class="qr-url" id="qrUrl">Yükleniyor...</div>
                 </div>
             </div>
-
+            
             <div class="msection">
                 <h3>Kayıtlı Playlist'ler</h3>
                 <div id="playlists"></div>
@@ -221,37 +221,13 @@
         </div>
     </div>
 
-    <!-- Firebase (compat) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
-    <!-- QR -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
     <script>
-        /***********************
-         * ✅ 1) Firebase Config
-         * Buraya Firebase Console'daki config'i yapıştır
-         ***********************/
-        const firebaseConfig = {
-            apiKey: "FIREBASE_API_KEY",
-            authDomain: "FIREBASE_AUTH_DOMAIN",
-            databaseURL: "FIREBASE_DATABASE_URL",
-            projectId: "FIREBASE_PROJECT_ID",
-            storageBucket: "FIREBASE_STORAGE_BUCKET",
-            messagingSenderId: "FIREBASE_SENDER_ID",
-            appId: "FIREBASE_APP_ID"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
         const DEFAULT_LOGO = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 50"><defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFA500"/><stop offset="100%" stop-color="#FF4500"/></linearGradient></defs><rect fill="#1a1f2e" width="70" height="50" rx="5"/><path d="M35 12 C32 15, 30 18, 30 23 C30 27, 32 33, 35 33 C38 33, 40 27, 40 23 C40 18, 38 15, 35 12 Z M35 30 C34 30, 33 28, 33 26 C33 23, 34 21, 35 19 C36 21, 37 23, 37 26 C37 28, 36 30, 35 30 Z" fill="url(#g)"/></svg>');
-
-        let channels = [], currentPlaylist = null, currentType = null, loadIndex = 0, controlPin = '';
-        let pinRef = null; // ✅ Firebase listener referansı
+        
+        let channels = [], currentPlaylist = null, currentType = null, loadIndex = 0, controlPin = '', checkInterval = null;
         const BATCH_SIZE = 20;
-
+        
         function generateMAC() {
             const saved = localStorage.getItem('macAddress');
             if (saved) return saved;
@@ -262,14 +238,14 @@
         const macAddress = generateMAC();
         document.getElementById('loadMAC').textContent = macAddress;
         document.getElementById('homeMAC').textContent = macAddress;
-
+        
         async function parseM3U(url) {
             const response = await fetch(url);
             const text = await response.text();
             const lines = text.split('\n');
             const parsed = [];
             let current = null;
-
+            
             for (let line of lines) {
                 line = line.trim();
                 if (line.startsWith('#EXTINF:')) {
@@ -280,7 +256,7 @@
                     if (logoMatch) current.logo = logoMatch[1];
                     const groupMatch = line.match(/group-title="([^"]+)"/);
                     if (groupMatch) current.group = groupMatch[1];
-
+                    
                     const g = current.group.toLowerCase(), n = current.name.toLowerCase();
                     if (g.includes('film') || g.includes('movie') || n.includes('film')) current.type = 'movie';
                     else if (g.includes('dizi') || g.includes('series') || g.includes('sezon')) current.type = 'series';
@@ -295,7 +271,7 @@
             }
             return parsed;
         }
-
+        
         async function loadPlaylist(pl) {
             document.getElementById('loadingScreen').classList.remove('hidden');
             try {
@@ -305,11 +281,11 @@
                 document.getElementById('homePlaylist').textContent = pl.name;
                 alert(`✅ ${channels.length} kanal yüklendi!`);
             } catch (e) {
-                alert('❌ Playlist yüklenemedi (CORS olabilir)');
+                alert('❌ Playlist yüklenemedi');
             }
             document.getElementById('loadingScreen').classList.add('hidden');
         }
-
+        
         function sortCategories(cats) {
             return cats.sort((a, b) => {
                 const yA = a.match(/\d{4}/), yB = b.match(/\d{4}/);
@@ -319,23 +295,23 @@
                 else return a.localeCompare(b, 'tr');
             });
         }
-
+        
         function showCategoryScreen(type) {
             if (channels.length === 0) { alert('Önce playlist ekleyin!'); return; }
             currentType = type;
             const filtered = channels.filter(ch => ch.type === type);
             if (filtered.length === 0) { alert('Bu kategoride içerik yok!'); return; }
-
+            
             const groups = {};
             filtered.forEach(ch => {
                 if (!groups[ch.group]) groups[ch.group] = [];
                 groups[ch.group].push(ch);
             });
-
+            
             const catList = document.getElementById('categoriesList');
             catList.innerHTML = '';
             const sorted = sortCategories(Object.keys(groups));
-
+            
             sorted.forEach((group, idx) => {
                 const div = document.createElement('div');
                 div.className = 'category-item' + (idx === 0 ? ' active' : '');
@@ -347,19 +323,19 @@
                 };
                 catList.appendChild(div);
             });
-
+            
             showChannels(groups[sorted[0]]);
             const typeNames = { 'live': 'Canlı TV', 'movie': 'Filmler', 'series': 'Diziler', 'radio': 'Radyo' };
             document.getElementById('categoryTitle').textContent = typeNames[type];
             document.getElementById('homeScreen').classList.add('hidden');
             document.getElementById('categoryScreen').classList.remove('hidden');
         }
-
+        
         function showChannels(channelList) {
             const container = document.getElementById('channelsContainer');
             container.innerHTML = '';
             loadIndex = 0;
-
+            
             const loadMore = () => {
                 const end = Math.min(loadIndex + BATCH_SIZE, channelList.length);
                 for (let i = loadIndex; i < end; i++) {
@@ -383,17 +359,17 @@
                 if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100 && loadIndex < channelList.length) loadMore();
             };
         }
-
+        
         function playChannel(ch) {
             const video = document.getElementById('videoPlayer');
             video.pause();
             video.src = '';
-
+            
             document.getElementById('playerTitle').textContent = ch.name;
             document.getElementById('playerCategory').textContent = ch.group;
             document.getElementById('categoryScreen').classList.add('hidden');
             document.getElementById('playerScreen').classList.remove('hidden');
-
+            
             video.src = ch.url;
             video.load();
             video.addEventListener('loadedmetadata', function onLoaded() {
@@ -403,50 +379,36 @@
                 video.removeEventListener('loadedmetadata', onLoaded);
             }, { once: true });
         }
-
+        
         function generatePin() {
             return Math.floor(1000 + Math.random() * 9000).toString();
         }
-
+        
         function generateQR() {
             controlPin = generatePin();
             document.getElementById('qrPin').textContent = controlPin;
-
-            /***********************
-             * ✅ 2) GitHub username
-             * KULLANICIADI yerine kendi kullanıcı adın
-             ***********************/
-            const qrUrl = `https://KULLANICIADI.github.io/anil-iptv/remote.html?pin=${controlPin}`;
+            const qrUrl = `https://KULLANICI.github.io/anil-iptv?pin=${controlPin}`;
             document.getElementById('qrUrl').textContent = qrUrl;
-
+            
             const qrContainer = document.getElementById('qrCode');
             qrContainer.innerHTML = '';
             new QRCode(qrContainer, { text: qrUrl, width: 180, height: 180 });
-
             startPinCheck();
         }
-
-        // ✅ Firebase üzerinden pin'i dinle
+        
         function startPinCheck() {
-            // eski listener varsa kapat
-            if (pinRef) pinRef.off();
-
-            pinRef = db.ref(`remote/${controlPin}`);
-
-            pinRef.on('value', (snap) => {
-                const data = snap.val();
-                if (!data) return;
-
-                const { name, url } = data;
-                addPlaylistAuto(name, url);
-
-                // Bir kere aldıktan sonra temizle
-                pinRef.remove();
-                pinRef.off();
-                pinRef = null;
-            });
+            if (checkInterval) clearInterval(checkInterval);
+            checkInterval = setInterval(() => {
+                const data = localStorage.getItem(`remote_${controlPin}`);
+                if (data) {
+                    const { name, url } = JSON.parse(data);
+                    addPlaylistAuto(name, url);
+                    localStorage.removeItem(`remote_${controlPin}`);
+                    clearInterval(checkInterval);
+                }
+            }, 3000);
         }
-
+        
         function addPlaylistAuto(name, url) {
             const playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
             const newPl = { id: 'pl_' + Date.now(), name: name, url: url };
@@ -456,11 +418,11 @@
             renderPlaylists();
             loadPlaylist(newPl);
         }
-
+        
         setTimeout(() => {
             document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('homeScreen').classList.remove('hidden');
-
+            
             const currentId = localStorage.getItem('currentPlaylist');
             if (currentId) {
                 const playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
@@ -471,28 +433,28 @@
                 }
             }
         }, 2000);
-
+        
         document.querySelectorAll('.card').forEach(card => {
             card.onclick = () => showCategoryScreen(card.dataset.type);
         });
-
+        
         document.getElementById('settings').onclick = () => {
             document.getElementById('modal').classList.remove('hidden');
             renderPlaylists();
             generateQR();
         };
-
+        
         document.getElementById('mclose').onclick = () => {
             document.getElementById('modal').classList.add('hidden');
-            if (pinRef) { pinRef.off(); pinRef = null; } // ✅ Firebase listener kapat
+            if (checkInterval) clearInterval(checkInterval);
         };
-
+        
         document.getElementById('refresh').onclick = () => location.reload();
         document.getElementById('backToHome').onclick = () => {
             document.getElementById('categoryScreen').classList.add('hidden');
             document.getElementById('homeScreen').classList.remove('hidden');
         };
-
+        
         document.getElementById('playerBack').onclick = () => {
             const video = document.getElementById('videoPlayer');
             video.pause();
@@ -500,7 +462,7 @@
             document.getElementById('playerScreen').classList.add('hidden');
             document.getElementById('categoryScreen').classList.remove('hidden');
         };
-
+        
         document.getElementById('playerPlay').onclick = () => {
             const video = document.getElementById('videoPlayer');
             if (video.paused) {
@@ -512,20 +474,20 @@
                 document.getElementById('playerPlay').textContent = '▶ Oynat';
             }
         };
-
+        
         document.getElementById('playerStop').onclick = () => {
             const video = document.getElementById('videoPlayer');
             video.pause();
             video.currentTime = 0;
         };
-
+        
         function renderPlaylists() {
             const container = document.getElementById('playlists');
             const playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
             const currentId = localStorage.getItem('currentPlaylist');
-
+            
             container.innerHTML = playlists.length === 0 ? '<p style="color: var(--text2); text-align: center;">Henüz playlist eklemediniz</p>' : '';
-
+            
             playlists.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'playlist-item';
@@ -540,26 +502,26 @@
                 container.appendChild(div);
             });
         }
-
+        
         document.getElementById('padd').onclick = () => {
             const name = document.getElementById('pname').value.trim();
             const url = document.getElementById('purl').value.trim();
-
+            
             if (!name || !url) { alert('İsim ve URL gerekli!'); return; }
-
+            
             const playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
             const newPl = { id: 'pl_' + Date.now(), name: name, url: url };
             playlists.push(newPl);
             localStorage.setItem('playlists', JSON.stringify(playlists));
-
+            
             alert('✅ Playlist eklendi!');
             renderPlaylists();
             loadPlaylist(newPl);
-
+            
             document.getElementById('pname').value = '';
             document.getElementById('purl').value = '';
         };
-
+        
         window.selectPlaylist = function(id) {
             const playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
             const pl = playlists.find(p => p.id === id);
@@ -568,39 +530,39 @@
                 renderPlaylists();
             }
         };
-
+        
         window.deletePlaylist = function(id) {
             if (!confirm('Silmek istediğinize emin misiniz?')) return;
             let playlists = JSON.parse(localStorage.getItem('playlists') || '[]');
             playlists = playlists.filter(p => p.id !== id);
             localStorage.setItem('playlists', JSON.stringify(playlists));
-
+            
             if (localStorage.getItem('currentPlaylist') === id) {
                 localStorage.removeItem('currentPlaylist');
                 document.getElementById('homePlaylist').textContent = '-';
                 channels = [];
             }
-
+            
             alert('✅ Silindi!');
             renderPlaylists();
         };
-
+        
         document.getElementById('clear').onclick = () => {
             if (!confirm('TÜM VERİLER SİLİNECEK! Emin misiniz?')) return;
             localStorage.clear();
             location.reload();
         };
-
+        
         if (typeof tizen !== 'undefined') {
             window.addEventListener('tizenhwkey', (e) => {
                 if (e.keyName === 'back') {
                     const modal = document.getElementById('modal');
                     const playerScreen = document.getElementById('playerScreen');
                     const categoryScreen = document.getElementById('categoryScreen');
-
+                    
                     if (!modal.classList.contains('hidden')) {
                         modal.classList.add('hidden');
-                        if (pinRef) { pinRef.off(); pinRef = null; }
+                        if (checkInterval) clearInterval(checkInterval);
                     } else if (!playerScreen.classList.contains('hidden')) {
                         document.getElementById('playerBack').click();
                     } else if (!categoryScreen.classList.contains('hidden')) {
