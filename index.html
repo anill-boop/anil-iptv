@@ -17,12 +17,14 @@
         .pin-display .pin { font-size: 48px; letter-spacing: 10px; font-weight: 700; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
-        input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
         input:focus { outline: none; border-color: #FFA500; }
-        .btn { width: 100%; padding: 15px; background: #FFA500; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn { width: 100%; padding: 15px; background: #FFA500; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; }
         .btn:hover { background: #FF8C00; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
-        .success { background: #4CAF50; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; display: none; }
+        .success, .error { padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; display: none; }
+        .success { background: #4CAF50; color: white; }
+        .error { background: #f44336; color: white; }
         .info { background: #f0f0f0; border-radius: 10px; padding: 15px; margin-top: 20px; font-size: 14px; color: #666; line-height: 1.6; }
     </style>
 </head>
@@ -43,31 +45,54 @@
         </div>
 
         <div class="form-group">
-            <label for="playlistName">Playlist Adı</label>
+            <label>Playlist Adı</label>
             <input type="text" id="playlistName" placeholder="Ana Liste">
         </div>
 
         <div class="form-group">
-            <label for="playlistUrl">M3U URL</label>
+            <label>M3U URL</label>
             <input type="url" id="playlistUrl" placeholder="http://...">
         </div>
 
         <button class="btn" id="sendBtn">📤 TV'ye Gönder</button>
 
         <div class="info">
-            <strong>📱 Kullanım:</strong><br>
-            1. TV'de QR okut<br>
-            2. Playlist adı ve M3U URL gir<br>
-            3. Gönder → TV'de otomatik eklenecek
+            <strong>📱 Nasıl Kullanılır:</strong><br>
+            1. TV'de Ayarlar → QR okut<br>
+            2. Playlist bilgilerini gir<br>
+            3. "Gönder" → TV'de otomatik eklenecek<br><br>
+            <strong>⚠️ Önemli:</strong> TV ve telefon aynı WiFi'de olmalı!
         </div>
 
         <div id="successMsg" class="success">
             <h3>✅ Başarılı!</h3>
             <p>Playlist TV'ye gönderildi!</p>
         </div>
+        
+        <div id="errorMsg" class="error">
+            <p id="errorText">Hata oluştu</p>
+        </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUkEq8-wKhJ4YvHj5K7X0QZ8qQ8fZnHk8",
+            authDomain: "anil-iptv-remote.firebaseapp.com",
+            databaseURL: "https://anil-iptv-remote-default-rtdb.firebaseio.com",
+            projectId: "anil-iptv-remote"
+        };
+        
+        let database;
+        try {
+            const app = initializeApp(firebaseConfig);
+            database = getDatabase(app);
+        } catch(e) {
+            console.error('Firebase:', e);
+        }
+        
         const urlParams = new URLSearchParams(window.location.search);
         const pin = urlParams.get('pin');
         
@@ -75,22 +100,30 @@
             document.getElementById('pinCode').textContent = pin;
         } else {
             document.getElementById('pinCode').textContent = 'HATA';
-            alert('PIN bulunamadı!');
         }
         
-        document.getElementById('sendBtn').addEventListener('click', () => {
+        document.getElementById('sendBtn').addEventListener('click', async () => {
             const name = document.getElementById('playlistName').value.trim();
             const url = document.getElementById('playlistUrl').value.trim();
             
-            if (!name || !url) { alert('Tüm alanları doldurun!'); return; }
-            if (!pin) { alert('PIN bulunamadı!'); return; }
+            if (!name || !url) {
+                document.getElementById('errorText').textContent = 'Tüm alanları doldurun!';
+                document.getElementById('errorMsg').style.display = 'block';
+                setTimeout(() => document.getElementById('errorMsg').style.display = 'none', 3000);
+                return;
+            }
             
             const btn = document.getElementById('sendBtn');
             btn.disabled = true;
             btn.textContent = '📤 Gönderiliyor...';
             
             try {
-                localStorage.setItem(`remote_${pin}`, JSON.stringify({ name, url }));
+                await set(ref(database, `pins/${pin}`), {
+                    name: name,
+                    url: url,
+                    timestamp: Date.now()
+                });
+                
                 document.getElementById('successMsg').style.display = 'block';
                 btn.textContent = '✅ Gönderildi!';
                 
@@ -102,7 +135,8 @@
                     document.getElementById('successMsg').style.display = 'none';
                 }, 3000);
             } catch (error) {
-                alert('Hata: ' + error.message);
+                document.getElementById('errorText').textContent = 'Hata: ' + error.message;
+                document.getElementById('errorMsg').style.display = 'block';
                 btn.textContent = '📤 TV'ye Gönder';
                 btn.disabled = false;
             }
