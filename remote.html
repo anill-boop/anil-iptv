@@ -1,135 +1,112 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anıl IPTV - Playlist Ekle</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Arial; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .container { background: white; border-radius: 20px; padding: 40px; max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-    .logo { text-align: center; margin-bottom: 30px; }
-    .logo svg { width: 80px; height: 80px; margin-bottom: 15px; }
-    .logo h1 { font-size: 28px; color: #333; }
-    .logo h1 strong { color: #FFA500; }
-    .pin-display { background: #FFA500; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
-    .pin-display h2 { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
-    .pin-display .pin { font-size: 48px; letter-spacing: 10px; font-weight: 700; }
-    .form-group { margin-bottom: 20px; }
-    label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
-    input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
-    input:focus { outline: none; border-color: #FFA500; }
-    .btn { width: 100%; padding: 15px; background: #FFA500; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
-    .btn:hover { background: #FF8C00; }
-    .btn:disabled { background: #ccc; cursor: not-allowed; }
-    .success { background: #4CAF50; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; display: none; }
-    .info { background: #f0f0f0; border-radius: 10px; padding: 15px; margin-top: 20px; font-size: 14px; color: #666; line-height: 1.6; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anıl IPTV - Playlist Ekle</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 20px; padding: 40px; max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .logo { text-align: center; margin-bottom: 30px; }
+        .logo svg { width: 80px; height: 80px; margin-bottom: 15px; }
+        .logo h1 { font-size: 28px; color: #333; }
+        .logo h1 strong { color: #FFA500; }
+        .pin-display { background: #FFA500; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .pin-display h2 { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
+        .pin-display .pin { font-size: 48px; letter-spacing: 10px; font-weight: 700; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; transition: border-color 0.3s; }
+        input:focus { outline: none; border-color: #FFA500; }
+        .btn { width: 100%; padding: 15px; background: #FFA500; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #FF8C00; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .success { background: #4CAF50; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; display: none; }
+        .info { background: #f0f0f0; border-radius: 10px; padding: 15px; margin-top: 20px; font-size: 14px; color: #666; line-height: 1.6; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <svg viewBox="0 0 60 60">
-        <defs><linearGradient id="fire" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFA500"/><stop offset="100%" stop-color="#FF4500"/></linearGradient></defs>
-        <path d="M30 10 C25 15, 20 20, 20 30 C20 38, 24 48, 30 48 C36 48, 40 38, 40 30 C40 20, 35 15, 30 10 Z M30 42 C27 42, 25 38, 25 34 C25 29, 28 25, 30 22 C32 25, 35 29, 35 34 C35 38, 33 42, 30 42 Z" fill="url(#fire)"/>
-      </svg>
-      <h1>Anıl <strong>IPTV</strong></h1>
-      <p style="color: #888; font-size: 14px;">Playlist Ekle</p>
+    <div class="container">
+        <div class="logo">
+            <svg viewBox="0 0 60 60">
+                <defs><linearGradient id="fire" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFA500"/><stop offset="100%" stop-color="#FF4500"/></linearGradient></defs>
+                <path d="M30 10 C25 15, 20 20, 20 30 C20 38, 24 48, 30 48 C36 48, 40 38, 40 30 C40 20, 35 15, 30 10 Z M30 42 C27 42, 25 38, 25 34 C25 29, 28 25, 30 22 C32 25, 35 29, 35 34 C35 38, 33 42, 30 42 Z" fill="url(#fire)"/>
+            </svg>
+            <h1>Anıl <strong>IPTV</strong></h1>
+            <p style="color: #888; font-size: 14px;">Playlist Ekle</p>
+        </div>
+
+        <div class="pin-display">
+            <h2>TV PIN:</h2>
+            <div class="pin" id="pinCode">----</div>
+        </div>
+
+        <div class="form-group">
+            <label for="playlistName">Playlist Adı</label>
+            <input type="text" id="playlistName" placeholder="Ana Liste">
+        </div>
+
+        <div class="form-group">
+            <label for="playlistUrl">M3U URL</label>
+            <input type="url" id="playlistUrl" placeholder="http://...">
+        </div>
+
+        <button class="btn" id="sendBtn">📤 TV'ye Gönder</button>
+
+        <div class="info">
+            <strong>📱 Kullanım:</strong><br>
+            1. TV'de QR okut<br>
+            2. Playlist adı ve M3U URL gir<br>
+            3. Gönder → TV'de otomatik eklenecek
+        </div>
+
+        <div id="successMsg" class="success">
+            <h3>✅ Başarılı!</h3>
+            <p>Playlist TV'ye gönderildi!</p>
+        </div>
     </div>
 
-    <div class="pin-display">
-      <h2>TV PIN:</h2>
-      <div class="pin" id="pinCode">----</div>
-    </div>
-
-    <div class="form-group">
-      <label for="playlistName">Playlist Adı</label>
-      <input type="text" id="playlistName" placeholder="Ana Liste">
-    </div>
-
-    <div class="form-group">
-      <label for="playlistUrl">M3U URL</label>
-      <input type="url" id="playlistUrl" placeholder="http://...">
-    </div>
-
-    <button class="btn" id="sendBtn">📤 TV'ye Gönder</button>
-
-    <div class="info">
-      <strong>📱 Kullanım:</strong><br>
-      1. TV'de QR okut<br>
-      2. Playlist adı ve M3U URL gir<br>
-      3. Gönder → TV'de otomatik eklenecek
-    </div>
-
-    <div id="successMsg" class="success">
-      <h3>✅ Başarılı!</h3>
-      <p>Playlist TV'ye gönderildi!</p>
-    </div>
-  </div>
-
-  <!-- Firebase (compat) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
-  <script>
-    /***********************
-     * ✅ Firebase Config
-     * Buraya Firebase Console'daki config'i yapıştır
-     ***********************/
-    const firebaseConfig = {
-      apiKey: "FIREBASE_API_KEY",
-      authDomain: "FIREBASE_AUTH_DOMAIN",
-      databaseURL: "FIREBASE_DATABASE_URL",
-      projectId: "FIREBASE_PROJECT_ID",
-      storageBucket: "FIREBASE_STORAGE_BUCKET",
-      messagingSenderId: "FIREBASE_SENDER_ID",
-      appId: "FIREBASE_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const pin = urlParams.get('pin');
-
-    if (pin) {
-      document.getElementById('pinCode').textContent = pin;
-    } else {
-      document.getElementById('pinCode').textContent = 'HATA';
-      alert('PIN bulunamadı!');
-    }
-
-    document.getElementById('sendBtn').addEventListener('click', async () => {
-      const name = document.getElementById('playlistName').value.trim();
-      const url = document.getElementById('playlistUrl').value.trim();
-
-      if (!name || !url) { alert('Tüm alanları doldurun!'); return; }
-      if (!pin) { alert('PIN bulunamadı!'); return; }
-
-      const btn = document.getElementById('sendBtn');
-      btn.disabled = true;
-      btn.textContent = '📤 Gönderiliyor...';
-
-      try {
-        await db.ref(`remote/${pin}`).set({ name, url, ts: Date.now() });
-
-        document.getElementById('successMsg').style.display = 'block';
-        btn.textContent = '✅ Gönderildi!';
-
-        setTimeout(() => {
-          document.getElementById('playlistName').value = '';
-          document.getElementById('playlistUrl').value = '';
-          btn.textContent = "📤 TV'ye Gönder";
-          btn.disabled = false;
-          document.getElementById('successMsg').style.display = 'none';
-        }, 2500);
-
-      } catch (err) {
-        alert('Hata: ' + err.message);
-        btn.textContent = "📤 TV'ye Gönder";
-        btn.disabled = false;
-      }
-    });
-  </script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const pin = urlParams.get('pin');
+        
+        if (pin) {
+            document.getElementById('pinCode').textContent = pin;
+        } else {
+            document.getElementById('pinCode').textContent = 'HATA';
+            alert('PIN bulunamadı!');
+        }
+        
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const name = document.getElementById('playlistName').value.trim();
+            const url = document.getElementById('playlistUrl').value.trim();
+            
+            if (!name || !url) { alert('Tüm alanları doldurun!'); return; }
+            if (!pin) { alert('PIN bulunamadı!'); return; }
+            
+            const btn = document.getElementById('sendBtn');
+            btn.disabled = true;
+            btn.textContent = '📤 Gönderiliyor...';
+            
+            try {
+                localStorage.setItem(`remote_${pin}`, JSON.stringify({ name, url }));
+                document.getElementById('successMsg').style.display = 'block';
+                btn.textContent = '✅ Gönderildi!';
+                
+                setTimeout(() => {
+                    document.getElementById('playlistName').value = '';
+                    document.getElementById('playlistUrl').value = '';
+                    btn.textContent = '📤 TV'ye Gönder';
+                    btn.disabled = false;
+                    document.getElementById('successMsg').style.display = 'none';
+                }, 3000);
+            } catch (error) {
+                alert('Hata: ' + error.message);
+                btn.textContent = '📤 TV'ye Gönder';
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
